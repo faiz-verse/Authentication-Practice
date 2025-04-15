@@ -72,6 +72,8 @@ const signUpForm = document.querySelector('#sign-up-form');
 const signInForm = document.querySelector('#sign-in-form');
 const signUpCancel = document.querySelector('#sign-up-cancel');
 const signInCancel = document.querySelector('#sign-in-cancel');
+const signUpLink = document.querySelector('#sign-up-link');
+const signInLink = document.querySelector('#sign-in-link');
 
 signUpBtn.addEventListener('click', () => {
     signUpForm.style.display = 'flex'
@@ -85,5 +87,15 @@ signUpCancel.addEventListener('click', () => {
 })
 signInCancel.addEventListener('click', () => {
     signInForm.style.display = 'none'
+})
+
+signUpLink.addEventListener('click', () => {
+    signInForm.style.display = 'none'
+    signUpForm.style.display = 'flex'
+})
+
+signInLink.addEventListener('click', () => {
+    signUpForm.style.display = 'none'
+    signInForm.style.display = 'flex'
 })
 
