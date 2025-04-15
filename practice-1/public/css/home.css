@@ -226,8 +226,11 @@ body {
     border: 1px solid tomato;
 
     position: absolute;
-    bottom: -50px;
+    bottom: -60px;
     left: calc(50% - 50px);
+
+    opacity: 0;
+    animation: reveal-top 5s cubic-bezier(0.19, 1, 0.22, 1) 2.75s forwards;
 }
 
 #clear-cookies:active {

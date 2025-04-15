@@ -63,3 +63,27 @@ clearCookiesBtn.addEventListener('click', () => {
     }
 
 });
+
+
+// SIGN UP and SIGN IN
+const signUpBtn = document.querySelector('#sign-up-button');
+const signInBtn = document.querySelector('#sign-in-button');
+const signUpForm = document.querySelector('#sign-up-form');
+const signInForm = document.querySelector('#sign-in-form');
+const signUpCancel = document.querySelector('#sign-up-cancel');
+const signInCancel = document.querySelector('#sign-in-cancel');
+
+signUpBtn.addEventListener('click', () => {
+    signUpForm.style.display = 'flex'
+})
+signInBtn.addEventListener('click', () => {
+    signInForm.style.display = 'flex'
+})
+
+signUpCancel.addEventListener('click', () => {
+    signUpForm.style.display = 'none'
+})
+signInCancel.addEventListener('click', () => {
+    signInForm.style.display = 'none'
+})
+
