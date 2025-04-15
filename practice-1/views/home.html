@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="../public/css/home.css">
-    <link rel="stylesheet" href="../public/css/forms.css">
+    <link rel="stylesheet" href="/public/css/home.css">
+    <link rel="stylesheet" href="/public/css/forms.css">
 </head>
 
 <body>
 
     <div id="brand">
-        <img src="../public/images/authentication.png" alt="logo">
+        <img src="/public/images/authentication.png" alt="logo">
         <span>Auth <span>App</span></span>
     </div>
 
@@ -40,7 +40,7 @@
     <!-- SIGN UP -->
     <div id="sign-up-form" class="modal-overlay">
         <div class="form-container">
-            <img id="sign-up-cancel" src="../public/images/icons8-cancel-24.png" alt="cross">
+            <img id="sign-up-cancel" src="/public/images/icons8-cancel-24.png" alt="cross">
             <h2>Sign Up</h2>
             <form action="/signup" method="POST">
                 <input type="text" name="username" placeholder="Username" required />
@@ -55,7 +55,7 @@
     <!-- SIGN IN -->
     <div id="sign-in-form" class="modal-overlay">
         <div class="form-container">
-            <img id="sign-in-cancel" src="../public/images/icons8-cancel-24.png" alt="cross">
+            <img id="sign-in-cancel" src="/public/images/icons8-cancel-24.png" alt="cross">
             <h2>Sign In</h2>
             <form action="/signin" method="POST">
                 <input type="text" name="username" placeholder="Username or Email" required />
@@ -66,7 +66,29 @@
         </div>
     </div>
 
-    <script src="../public/js/home.js"></script>
+    <script src="/public/js/home.js"></script>
+    <script>
+        const signupForm = document.querySelector('form[action="/signup"]');
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(signupForm);
+
+            const res = await fetch('/signup', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                alert(data.message)
+                window.location.href = data.redirectTo;
+            } else {
+                alert(data.message || "Signup failed");
+            }
+        });
+
+    </script>
 </body>
 
 </html>

@@ -4,6 +4,8 @@ const mime = require('mime-types') // optional but recommended
 
 const pageController = require('../controllers/pageController.js')
 
+const authRoutes = require('./authRoutes'); // 👈 import auth routes
+
 const router = (req, res) => {
 
     // ✅ Serve static files from /public
@@ -32,6 +34,11 @@ const router = (req, res) => {
     }
     else {
         pageController.notFound(req, res)
+    }
+
+     // ✅ Forward auth routes here
+     if (req.url === '/signup' || req.url === '/signin') {
+        return authRoutes(req, res); // 👈 manually forward
     }
 }
 

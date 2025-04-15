@@ -98,4 +98,3 @@ signInLink.addEventListener('click', () => {
     signUpForm.style.display = 'none'
     signInForm.style.display = 'flex'
 })
-
