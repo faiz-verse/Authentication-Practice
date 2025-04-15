@@ -87,14 +87,16 @@ body {
 }
 
 #buttons-wrapper button:nth-child(2):active {
-    border: 5px double tomato;
-    transform: translateX(4px);
+    background: tomato;
+    color: white;
 }
 
 #home-content {
     width: 50vw;
     text-align: center;
     line-height: 1.7;
+
+    position: relative;
 }
 
 #home-content #title {
@@ -159,18 +161,18 @@ body {
 
 /* COOKIE */
 #cookie-notifier{
-    height: 70px;
+    height: 60px;
     width: 400px;
     padding: 5px 10px;
     font-size: 14px;
-    background: rgb(194, 253, 194);
+    background: rgb(213, 255, 213);
 
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 
-    border-left: 5px solid lightgreen;
+    border-left: 5px solid rgb(40, 207, 40);
 
     position: fixed;
     right: 0px;
@@ -178,30 +180,57 @@ body {
 
     transform: translateX(100%);
     opacity: 0;
-
-    animation: reveal-notifier 2s cubic-bezier(0.23, 1, 0.320, 1) 4s forwards;
 }
 
 #cookie-notifier button{
     all: unset;
 
-    border: 1px solid green;
+    color: rgb(40, 207, 40);
     padding: 10px;
     border-radius: 5px;
 
     cursor: pointer;
 }
 
-@keyframes reveal-notifier {
-    0%{
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    50%{
-        opacity: 1;
-    }
-    100%{
-        transform: translateX(0%);
-        opacity: 1;
-    }
+#cookie-notifier button:nth-child(2):hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgb(40, 207, 40);
+}
+
+#cookie-notifier button:nth-child(3) {
+    border-radius: 5px;
+    border: 1px solid rgb(40, 207, 40);
+}
+
+#cookie-notifier button:nth-child(3):active {
+    background: rgb(40, 207, 40);
+    color: white;
+}
+
+#clear-cookies{
+    all: unset;
+    height: 40px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: tomato;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+    border: 1px solid tomato;
+
+    position: absolute;
+    bottom: -50px;
+    left: calc(50% - 50px);
+}
+
+#clear-cookies:active {
+    background: tomato;
+    color: white;
 }
