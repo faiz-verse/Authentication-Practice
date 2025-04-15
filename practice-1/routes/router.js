@@ -1,14 +1,37 @@
+const fs = require('fs')
+const path = require('path')
+const mime = require('mime-types') // optional but recommended
+
 const pageController = require('../controllers/pageController.js')
 
-const router = (req,res) => {
-    if(req.url == '/'){
-        pageController.home(req,res)
+const router = (req, res) => {
+
+    // ✅ Serve static files from /public
+    if (req.url.startsWith('/public/')) {
+        const filePath = path.join(__dirname, '..', req.url)
+        const contentType = mime.lookup(filePath) || 'application/octet-stream'
+
+        fs.readFile(filePath, (err, content) => {
+            if (err) {
+                res.writeHead(404, { 'Content-Type': 'text/plain' })
+                res.end('File Not Found 😞')
+            } else {
+                res.writeHead(200, { 'Content-Type': contentType })
+                res.end(content)
+            }
+        })
+        return
     }
-    else if(req.url == '/dashboard'){
-        pageController.dashboard(req,res)
+
+    // ✅ For pages
+    if (req.url == '/') {
+        pageController.home(req, res)
     }
-    else{
-        pageController.notFound(req,res)
+    else if (req.url == '/dashboard') {
+        pageController.dashboard(req, res)
+    }
+    else {
+        pageController.notFound(req, res)
     }
 }
 
