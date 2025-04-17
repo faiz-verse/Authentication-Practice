@@ -6,6 +6,7 @@ const pageController = require('../controllers/pageController.js')
 
 const authRoutes = require('./authRoutes'); // 👈 import auth routes
 const validateSession = require('../controllers/validateSession.js');
+const logoutSession = require('../controllers/logoutSession.js')
 
 const router = (req, res) => {
 
@@ -37,8 +38,14 @@ const router = (req, res) => {
     else if (req.url === '/signup' || req.url === '/signin') {
         return authRoutes(req, res) // 👈 manually forward
     }
-    else if (req.url === '/validate-session'){
+    // ✅ validate session
+    else if (req.url === '/validate-session') {
         return validateSession(req, res)
+    }
+    // ✅ logout session (delete session cookie)
+    else if (req.url === '/logout') {
+        console.log('📡 Incoming request URL:', req.method, req.url);
+        return logoutSession(req, res)
     }
     else {
         pageController.notFound(req, res)

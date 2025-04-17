@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (data.success) {
         alert('Auto-login successful!', data.user);
         // redirect or show dashboard directly
-        window.location.href = '/dashboard';
+        // window.location.href = '/dashboard';
     } else {
         alert('Not logged in:', data.message);
     }

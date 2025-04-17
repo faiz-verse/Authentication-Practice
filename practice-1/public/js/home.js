@@ -48,7 +48,7 @@ cookieAcceptBtn.addEventListener('click', () => {
 });
 
 // Clear cookie button event
-clearCookiesBtn.addEventListener('click', () => {
+clearCookiesBtn.addEventListener('click', async () => {
 
     if (document.cookie) {
         // Delete the cookie
@@ -73,6 +73,22 @@ clearCookiesBtn.addEventListener('click', () => {
         cookieNotifier.style.transition = "all 2s cubic-bezier(0.23, 1, 0.320, 1)"
         cookieNotifier.style.transform = "translateX(0%)"; // show the notifier
         cookieNotifier.style.opacity = "1"; // show out the notifier
+
+        // logging out of the session
+        const response = await fetch('/logout', {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            console.log(data.message);
+            alert('Logged out successfully!');
+            window.location.href = '/';
+        } else {
+            console.log('Unable to delete the session');
+        }
     }
     else {
         return

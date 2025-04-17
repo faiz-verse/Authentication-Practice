@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../public/css/dashboard.css">
 </head>
+
 <body>
-    <h1>Hey this is Dashboard Page 📊</h1>
+    <div id="brand">
+        <img src="../public/images/authentication.png" alt="logo">
+        <span>Auth <span>App</span></span>
+    </div>
+
+    <div id="buttons-wrapper">
+        <button id="log-out-button">Log out</button>
+    </div>
+
+    <div id="dashboard-content">
+        <div id="title"><span>Your Dashboard</span></div>
+        <div id="info">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil culpa vitae cupiditate, dolor in dolorum
+                nulla, laborum voluptas eius placeat magnam! Minima magnam praesentium error accusamus sequi neque
+                nesciunt atque.</p>
+        </div>
+    </div>
+
+    <!-- CUSTOMIZE -->
+    <div id="customize-form">
+            <h2>Personalize your Dashboard</h2>
+            <form action="/customize" method="POST">
+                <label for="theme">Choose your theme</label>
+                <div>
+                    <div id="theme-options">
+                        <div class="option">
+                            <div class="color1"></div>
+                            <div class="color2"></div>
+                        </div>
+                        <div class="option">
+                            <div class="color1"></div>
+                            <div class="color2"></div>
+                        </div>
+                        <div class="option">
+                            <div class="color1"></div>
+                            <div class="color2"></div>
+                        </div>
+                    </div>
+                    <input type="text" name="theme" placeholder="Theme" required />
+                </div>
+
+                <div>
+                <label for="font">Choose your font</label>
+                <input type="text" name="font" placeholder="Font" required />
+                <select name="dropdown" id="dropdown">
+                    <option value="font1">font 1</option>
+                    <option value="font1">font 2</option>
+                    <option value="font1">font 3</option>
+                    <option value="font1">font 4</option>
+                </select>
+            </div>
+                
+                <button type="submit">Customize</button>
+            </form>
+    </div>
 </body>
+
 </html>
