@@ -2,6 +2,26 @@ const signupForm = document.querySelector('form[action="/signup"]');
 // const signupRemember = document.querySelector('form[action="/signup"] div input[type="checkbox"]').checked
 // console.log(signupRemember)
 
+window.addEventListener('DOMContentLoaded', () => {
+    const getCookie = (name) => {
+        return document.cookie
+            .split('; ')
+            .find(row => row.startsWith(name + '='))
+            ?.split('=')[1];
+    };
+
+    const savedUsername = getCookie('savedUsername');
+    const savedPassword = getCookie('savedPassword');
+    const savedEmail = getCookie('savedUseremail');
+
+    if (savedUsername && savedPassword) {
+        document.querySelector('form[action="/signup"] input[name="username"]').value = savedUsername;
+        document.querySelector('form[action="/signup"] input[name="password"]').value = savedPassword;
+        document.querySelector('form[action="/signup"] input[name="email"]').value = savedEmail;
+        document.getElementById('remember').checked = true;
+    }
+});
+
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -10,9 +30,9 @@ signupForm.addEventListener('submit', async (e) => {
         console.log(key, value);  // Log key-value pairs
     }
 
-    const username = document.querySelector('input[name="username"]').value;
-    const useremail = document.querySelector('input[name="email"]').value;
-    const password = document.querySelector('input[name="password"]').value;
+    const username = document.querySelector('form[action="/signup"] input[name="username"]').value;
+    const useremail = document.querySelector('form[action="/signup"] input[name="email"]').value;
+    const password = document.querySelector('form[action="/signup"] input[name="password"]').value;
 
     // const rememberMe = formData.get('remember')
     // ✅ If rememberMe is checked → store in cookie
