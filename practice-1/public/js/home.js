@@ -57,6 +57,18 @@ clearCookiesBtn.addEventListener('click', () => {
         document.cookie = 'savedUsername=; max-age=0';
         document.cookie = 'savedUseremail=; max-age=0';
         document.cookie = 'savedPassword=; max-age=0';
+        // Clear old sign in cookies if unchecked
+        document.cookie = 'savedSignInUsername=; max-age=0';
+        document.cookie = 'savedSignInPassword=; max-age=0';
+        // clearing the form
+        document.querySelector('form[action="/signup"] input[name="username"]').value = "";
+        document.querySelector('form[action="/signup"] input[name="password"]').value = "";
+        document.querySelector('form[action="/signup"] input[name="email"]').value = "";
+        document.getElementById('remember').checked = false;
+        // clearing for sign in
+        document.querySelector('form[action="/signin"] input[name="username"]').value = "";
+        document.querySelector('form[action="/signin"] input[name="password"]').value = "";
+        document.querySelector('form[action="/signin"] input[type="checkbox"]').checked = false;
 
         cookieNotifier.style.transition = "all 2s cubic-bezier(0.23, 1, 0.320, 1)"
         cookieNotifier.style.transform = "translateX(0%)"; // show the notifier

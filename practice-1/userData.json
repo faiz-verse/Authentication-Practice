@@ -70,5 +70,17 @@
     "email": "2001vikaskumaryadavpch@gmail.com",
     "password": "asasa",
     "signedUpAt": 1744872207639
+  },
+  {
+    "username": "Faizan",
+    "email": "faizan.khan@featsystems.com",
+    "password": "faizan@123",
+    "signedUpAt": 1744872890631
+  },
+  {
+    "username": "Faizan",
+    "email": "faizan.khan@featsystems.com",
+    "password": "faizan@123",
+    "signedUpAt": 1744872931841
   }
 ]

@@ -10,15 +10,24 @@ window.addEventListener('DOMContentLoaded', () => {
             ?.split('=')[1];
     };
 
+    // for sign up
     const savedUsername = getCookie('savedUsername');
     const savedPassword = getCookie('savedPassword');
     const savedEmail = getCookie('savedUseremail');
-
-    if (savedUsername && savedPassword) {
+    if (savedUsername && savedPassword && savedEmail) {
         document.querySelector('form[action="/signup"] input[name="username"]').value = savedUsername;
         document.querySelector('form[action="/signup"] input[name="password"]').value = savedPassword;
         document.querySelector('form[action="/signup"] input[name="email"]').value = savedEmail;
-        document.getElementById('remember').checked = true;
+        document.querySelector('form[action="/signup"] input[type="checkbox"]').checked = true;
+    }
+    
+    // for sign in
+    const savedSignInUsername = getCookie('savedSignInUsername');
+    const savedSignInPassword = getCookie('savedSignInPassword');
+    if (savedSignInUsername && savedSignInPassword){
+        document.querySelector('form[action="/signin"] input[name="username"]').value = savedSignInUsername;
+        document.querySelector('form[action="/signin"] input[name="password"]').value = savedSignInPassword;
+        document.querySelector('form[action="/signin"] input[type="checkbox"]').checked = true;
     }
 });
 
@@ -70,6 +79,18 @@ signinForm.addEventListener('submit', async (e) => {
     const formData = new FormData(signinForm);
     for (let [key, value] of formData.entries()) {
         console.log(key, value);  // Log key-value pairs
+    }
+
+    const username = document.querySelector('form[action="/signin"] input[name="username"]').value;
+    const password = document.querySelector('form[action="/signin"] input[name="password"]').value;
+    // ✅ If rememberMe is checked → store in cookie
+    if (formData.has('remember')) {
+        document.cookie = `savedSignInUsername=${username}; max-age=${7 * 24 * 60 * 60}`;
+        document.cookie = `savedSignInPassword=${password}; max-age=${7 * 24 * 60 * 60}`;
+    } else {
+        // Clear old sign in cookies if unchecked
+        document.cookie = 'savedSignInUsername=; max-age=0';
+        document.cookie = 'savedSignInPassword=; max-age=0';
     }
 
     const urlEncodedData = new URLSearchParams(formData).toString();
