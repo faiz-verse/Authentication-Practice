@@ -20,11 +20,11 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('form[action="/signup"] input[name="email"]').value = savedEmail;
         document.querySelector('form[action="/signup"] input[type="checkbox"]').checked = true;
     }
-    
+
     // for sign in
     const savedSignInUsername = getCookie('savedSignInUsername');
     const savedSignInPassword = getCookie('savedSignInPassword');
-    if (savedSignInUsername && savedSignInPassword){
+    if (savedSignInUsername && savedSignInPassword) {
         document.querySelector('form[action="/signin"] input[name="username"]').value = savedSignInUsername;
         document.querySelector('form[action="/signin"] input[name="password"]').value = savedSignInPassword;
         document.querySelector('form[action="/signin"] input[type="checkbox"]').checked = true;
@@ -39,23 +39,6 @@ signupForm.addEventListener('submit', async (e) => {
         console.log(key, value);  // Log key-value pairs
     }
 
-    const username = document.querySelector('form[action="/signup"] input[name="username"]').value;
-    const useremail = document.querySelector('form[action="/signup"] input[name="email"]').value;
-    const password = document.querySelector('form[action="/signup"] input[name="password"]').value;
-
-    // const rememberMe = formData.get('remember')
-    // ✅ If rememberMe is checked → store in cookie
-    if (formData.has('remember')) {
-        document.cookie = `savedUsername=${username}; max-age=${7 * 24 * 60 * 60}`;
-        document.cookie = `savedUseremail=${useremail}; max-age=${7 * 24 * 60 * 60}`;
-        document.cookie = `savedPassword=${password}; max-age=${7 * 24 * 60 * 60}`;
-    } else {
-        // Clear old cookies if unchecked
-        document.cookie = 'savedUsername=; max-age=0';
-        document.cookie = 'savedUseremail=; max-age=0';
-        document.cookie = 'savedPassword=; max-age=0';
-    }
-
     const urlEncodedData = new URLSearchParams(formData).toString();
 
     const res = await fetch('/signup', {
@@ -66,6 +49,21 @@ signupForm.addEventListener('submit', async (e) => {
     const data = await res.json();
     if (data.success) {
         alert(data.message)
+        // to remember
+        const username = document.querySelector('form[action="/signup"] input[name="username"]').value;
+        const useremail = document.querySelector('form[action="/signup"] input[name="email"]').value;
+        const password = document.querySelector('form[action="/signup"] input[name="password"]').value;
+        // ✅ If rememberMe is checked → store in cookie
+        if (formData.has('remember')) {
+            document.cookie = `savedUsername=${username}; max-age=${7 * 24 * 60 * 60}`;
+            document.cookie = `savedUseremail=${useremail}; max-age=${7 * 24 * 60 * 60}`;
+            document.cookie = `savedPassword=${password}; max-age=${7 * 24 * 60 * 60}`;
+        } else {
+            // Clear old cookies if unchecked
+            document.cookie = 'savedUsername=; max-age=0';
+            document.cookie = 'savedUseremail=; max-age=0';
+            document.cookie = 'savedPassword=; max-age=0';
+        }
         // window.location.href = data.redirectTo;
     } else {
         alert(data.message || "Signup failed");
@@ -81,18 +79,6 @@ signinForm.addEventListener('submit', async (e) => {
         console.log(key, value);  // Log key-value pairs
     }
 
-    const username = document.querySelector('form[action="/signin"] input[name="username"]').value;
-    const password = document.querySelector('form[action="/signin"] input[name="password"]').value;
-    // ✅ If rememberMe is checked → store in cookie
-    if (formData.has('remember')) {
-        document.cookie = `savedSignInUsername=${username}; max-age=${7 * 24 * 60 * 60}`;
-        document.cookie = `savedSignInPassword=${password}; max-age=${7 * 24 * 60 * 60}`;
-    } else {
-        // Clear old sign in cookies if unchecked
-        document.cookie = 'savedSignInUsername=; max-age=0';
-        document.cookie = 'savedSignInPassword=; max-age=0';
-    }
-
     const urlEncodedData = new URLSearchParams(formData).toString();
 
     const res = await fetch('/signin', {
@@ -103,6 +89,18 @@ signinForm.addEventListener('submit', async (e) => {
     const data = await res.json();
     if (data.success) {
         alert(data.message)
+        // for remember
+        const username = document.querySelector('form[action="/signin"] input[name="username"]').value;
+        const password = document.querySelector('form[action="/signin"] input[name="password"]').value;
+        // ✅ If rememberMe is checked → store in cookie
+        if (formData.has('remember')) {
+            document.cookie = `savedSignInUsername=${username}; max-age=${7 * 24 * 60 * 60}`;
+            document.cookie = `savedSignInPassword=${password}; max-age=${7 * 24 * 60 * 60}`;
+        } else {
+            // Clear old sign in cookies if unchecked
+            document.cookie = 'savedSignInUsername=; max-age=0';
+            document.cookie = 'savedSignInPassword=; max-age=0';
+        }
         // window.location.href = data.redirectTo;
     } else {
         alert(data.message || "Signin failed");
