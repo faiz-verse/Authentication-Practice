@@ -82,5 +82,13 @@
     "email": "faizan.khan@featsystems.com",
     "password": "faizan@123",
     "signedUpAt": 1744872931841
+  },
+  {
+    "username": "Faizan",
+    "email": "faizannkhan2405@gmail.com",
+    "password": "faizan@123",
+    "signedUpAt": 1744880328499,
+    "sessionId": "2el8r01h1uqm9l4p25v",
+    "sessionExpiresAt": 1745485128499
   }
 ]

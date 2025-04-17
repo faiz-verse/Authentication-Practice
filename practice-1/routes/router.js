@@ -5,6 +5,7 @@ const mime = require('mime-types') // optional but recommended
 const pageController = require('../controllers/pageController.js')
 
 const authRoutes = require('./authRoutes'); // 👈 import auth routes
+const validateSession = require('../controllers/validateSession.js');
 
 const router = (req, res) => {
 
@@ -34,7 +35,10 @@ const router = (req, res) => {
     }
     // ✅ Forward auth routes here
     else if (req.url === '/signup' || req.url === '/signin') {
-        return authRoutes(req, res); // 👈 manually forward
+        return authRoutes(req, res) // 👈 manually forward
+    }
+    else if (req.url === '/validate-session'){
+        return validateSession(req, res)
     }
     else {
         pageController.notFound(req, res)
