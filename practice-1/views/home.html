@@ -88,6 +88,26 @@
             }
         });
 
+        const signinForm = document.querySelector('form[action="/signin"]');
+        signinForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(signinForm);
+
+            const res = await fetch('/signin', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                alert(data.message)
+                window.location.href = data.redirectTo;
+            } else {
+                alert(data.message || "Signin failed");
+            }
+        });
+
     </script>
 </body>
 

@@ -32,13 +32,12 @@ const router = (req, res) => {
     else if (req.url == '/dashboard') {
         pageController.dashboard(req, res)
     }
+    // ✅ Forward auth routes here
+    else if (req.url === '/signup' || req.url === '/signin') {
+        return authRoutes(req, res); // 👈 manually forward
+    }
     else {
         pageController.notFound(req, res)
-    }
-
-     // ✅ Forward auth routes here
-     if (req.url === '/signup' || req.url === '/signin') {
-        return authRoutes(req, res); // 👈 manually forward
     }
 }
 
