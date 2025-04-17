@@ -73,16 +73,21 @@
             e.preventDefault();
 
             const formData = new FormData(signupForm);
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);  // Log key-value pairs
+            }
+
+            const urlEncodedData = new URLSearchParams(formData).toString();
 
             const res = await fetch('/signup', {
                 method: 'POST',
-                body: formData,
+                body: urlEncodedData,
             });
 
             const data = await res.json();
             if (data.success) {
                 alert(data.message)
-                window.location.href = data.redirectTo;
+                // window.location.href = data.redirectTo;
             } else {
                 alert(data.message || "Signup failed");
             }
@@ -93,16 +98,21 @@
             e.preventDefault();
 
             const formData = new FormData(signinForm);
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);  // Log key-value pairs
+            }
+
+            const urlEncodedData = new URLSearchParams(formData).toString();
 
             const res = await fetch('/signin', {
                 method: 'POST',
-                body: formData,
+                body: urlEncodedData,
             });
 
             const data = await res.json();
             if (data.success) {
                 alert(data.message)
-                window.location.href = data.redirectTo;
+                // window.location.href = data.redirectTo;
             } else {
                 alert(data.message || "Signin failed");
             }

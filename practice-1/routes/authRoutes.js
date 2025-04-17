@@ -5,12 +5,14 @@ const authRoutes = (req, res) => {
         let body = '';
         req.on('data', chunk => body += chunk);
         req.on('end', () => {
+            console.log('🧾 Raw body:', body);  // ← Add this line
             const formData = new URLSearchParams(body);
             req.body = {
                 username: formData.get('username'),
                 email: formData.get('email'),
                 password: formData.get('password')
             };
+            console.log('🧩 Parsed body:', req.body);  // ← Also add this
             signupUser(req, res);
         });
         return;
@@ -20,11 +22,13 @@ const authRoutes = (req, res) => {
         let body = '';
         req.on('data', chunk => body += chunk);
         req.on('end', () => {
+            console.log('🧾 Raw body:', body);  // ← Add this line
             const formData = new URLSearchParams(body);
             req.body = {
                 username: formData.get('username'),
                 password: formData.get('password')
             };
+            console.log('🧩 Parsed body:', req.body);  // ← Also add this
             signinUser(req, res);
         });
         return;
