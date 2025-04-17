@@ -46,6 +46,8 @@
                 <input type="text" name="username" placeholder="Username" required />
                 <input type="email" name="email" placeholder="Email" required />
                 <input type="password" name="password" placeholder="Password" required />
+                <div><input type="checkbox" id="remember" name="remember" value="remember">
+                <label for="remember">Remember me</label></div>
                 <button type="submit">Register</button>
                 <p>Already have an account? <a id="sign-in-link">Sign In</a></p>
             </form>
@@ -67,58 +69,7 @@
     </div>
 
     <script src="/public/js/home.js"></script>
-    <script>
-        const signupForm = document.querySelector('form[action="/signup"]');
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(signupForm);
-            for (let [key, value] of formData.entries()) {
-                console.log(key, value);  // Log key-value pairs
-            }
-
-            const urlEncodedData = new URLSearchParams(formData).toString();
-
-            const res = await fetch('/signup', {
-                method: 'POST',
-                body: urlEncodedData,
-            });
-
-            const data = await res.json();
-            if (data.success) {
-                alert(data.message)
-                // window.location.href = data.redirectTo;
-            } else {
-                alert(data.message || "Signup failed");
-            }
-        });
-
-        const signinForm = document.querySelector('form[action="/signin"]');
-        signinForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(signinForm);
-            for (let [key, value] of formData.entries()) {
-                console.log(key, value);  // Log key-value pairs
-            }
-
-            const urlEncodedData = new URLSearchParams(formData).toString();
-
-            const res = await fetch('/signin', {
-                method: 'POST',
-                body: urlEncodedData,
-            });
-
-            const data = await res.json();
-            if (data.success) {
-                alert(data.message)
-                // window.location.href = data.redirectTo;
-            } else {
-                alert(data.message || "Signin failed");
-            }
-        });
-
-    </script>
+    <script src="/public/js/signIn&Up.js"></script>
 </body>
 
 </html>

@@ -53,6 +53,10 @@ clearCookiesBtn.addEventListener('click', () => {
     if (document.cookie) {
         // Delete the cookie
         document.cookie = "canStoreCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        // Clear old cookies if unchecked
+        document.cookie = 'savedUsername=; max-age=0';
+        document.cookie = 'savedUseremail=; max-age=0';
+        document.cookie = 'savedPassword=; max-age=0';
 
         cookieNotifier.style.transition = "all 2s cubic-bezier(0.23, 1, 0.320, 1)"
         cookieNotifier.style.transform = "translateX(0%)"; // show the notifier
