@@ -166,6 +166,7 @@ body {
 }
 
 #customize-form h2{
+
 }
 
 form label{
@@ -192,17 +193,46 @@ form #theme-options{
 #theme-options .option{
     height: 25px;
     width: 25px;
-    background: rebeccapurple;
     display: flex;
     flex-direction: column;
     gap: 0px;
     border-radius: 5px;
     overflow: hidden;
-    
+    border: 1px solid lightgray;
 }
 
 .option .color1, .option .color2{
     height: 50%;
     width: 100%;
-    border: 1px solid black;
+}
+
+#theme-options .option:nth-child(1) .color1{
+    background: rgb(238, 238, 238);
+}
+#theme-options .option:nth-child(1) .color2{
+    background: darkslategray;
+}
+#theme-options .option:nth-child(2) .color1{
+    background: papayawhip;
+}
+#theme-options .option:nth-child(2) .color2{
+    background: darkred;
+}
+#theme-options .option:nth-child(3) .color1{
+    background: lightcyan;
+}
+#theme-options .option:nth-child(3) .color2{
+    background: darkcyan;
+}
+#theme-options .option:nth-child(4) .color1{
+    background: rgb(225, 255, 225);
+}
+#theme-options .option:nth-child(4) .color2{
+    background: darkgreen;
+}
+#theme-options .option:nth-child(5) .color1{
+    background: white;
+}
+#theme-options .option:nth-child(5) .color2{
+    background: tomato;
 }
