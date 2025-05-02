@@ -50,7 +50,11 @@ const router = (req, res) => {
     else if (req.url === "/customize" && req.method === "POST") {
         const { updatePreferences } = require("../controllers/authController");
         updatePreferences(req, res);
-    }    
+    }  
+    else if (req.url === "/getPreferences" && req.method === "GET") {
+        const { getPreferences } = require("../controllers/authController");
+        getPreferences(req, res);
+    }     
     else {
         pageController.notFound(req, res)
     }

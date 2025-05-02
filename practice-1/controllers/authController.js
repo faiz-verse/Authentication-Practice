@@ -105,7 +105,6 @@ const signinUser = (req, res) => {
 };
 
 
-const querystring = require("querystring");
 const updatePreferences = (req, res) => {
     let body = "";
     req.on("data", chunk => {
@@ -168,6 +167,59 @@ const updatePreferences = (req, res) => {
 };
 
 
+const getPreferences = (req, res) => {
+    console.log("getPreferences route triggered");
+
+    req.on("data", (chunk) => {
+        console.log("Received chunk:", chunk);  // Log chunks of data to confirm request data
+    });
+
+    req.on("end", () => {
+        console.log("Request ended");  // Log when the request ends
+        try {
+            const cookies = req.headers.cookie || "";
+            const sessionId = cookies
+                .split(";")
+                .map(cookie => cookie.trim())
+                .find(c => c.startsWith("sessionId="))
+                ?.split("=")[1];
+
+            console.log("Session ID from cookies:", sessionId); // Log the sessionId
+
+            if (!sessionId) {
+                console.log("No sessionId found in cookies");
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ success: false, message: "No session ID found" }));
+                return;
+            }
+
+            const jsonFilePath = path.join(__dirname, '..', 'userData.json');
+            const fileData = fs.readFileSync(jsonFilePath, "utf-8");
+            const users = JSON.parse(fileData);
+
+            console.log("Users data:", users);  // Log the users to see if it's being read correctly
+
+            const user = users.find(u => u.sessionId === sessionId);
+            if (!user) {
+                console.log("No user found with sessionId:", sessionId);
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ success: false, message: "Invalid session" }));
+                return;
+            }
+
+            const preferences = user.preferences || {};
+            console.log("User preferences:", preferences);  // Log preferences to confirm they are fetched
+
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: true, preferences: preferences }));
+
+        } catch (err) {
+            console.error("Error in getPreferences:", err);
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, message: "Server error" }));
+        }
+    });
+};
 
 
-module.exports = { signupUser, signinUser, updatePreferences };
+module.exports = { signupUser, signinUser, updatePreferences, getPreferences };

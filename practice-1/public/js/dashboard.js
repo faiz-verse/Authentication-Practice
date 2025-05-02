@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeOptions = document.querySelectorAll('#theme-options .option');
     const themeInput = document.querySelector(`input[name='theme']`);
     const body = document.querySelector('body');
+    const fontInput = document.getElementById('fontInput');
+    const dropdown = document.getElementById('dropdown');
+    const root = document.documentElement;
 
     let selectedTheme = 'default'; // <--- Declare here
     let selectedFont = 'Arial';    // <--- Declare here
@@ -34,8 +37,55 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const root = document.documentElement;
+    // Function to apply the saved preferences to the page
+    const applyPreferences = (preferences) => {
+        if (preferences) {
+            console.log("Applying preferences:", preferences);  // Add this line
+            selectedTheme = preferences.theme || 'default';
+            selectedFont = preferences.font || 'Arial';
+   
+            // Apply theme
+            const themeObj = themeJsonObj[selectedTheme] || themeJsonObj['default'];
+            root.style.setProperty('--theme-light', themeObj.themeLight);
+            root.style.setProperty('--theme-dark', themeObj.themeDark);
+            themeInput.value = selectedTheme;
+   
+            // Apply font
+            body.style.fontFamily = selectedFont;
+            fontInput.style.fontFamily = selectedFont;
+            dropdown.value = selectedFont;  // Ensure the dropdown shows the selected font
+        }
+    };
+   
 
+    // Fetch preferences from the backend
+    const loadPreferences = async () => {
+        try {
+            const response = await fetch('/getPreferences', {
+                method: 'GET',
+                credentials: 'include' // Ensure the user's session or cookies are sent along
+            });
+   
+            if (!response.ok) {
+                throw new Error('Failed to fetch preferences');
+            }
+   
+            const data = await response.json();
+   
+            console.log(data);  // Add this line to inspect the returned data
+   
+            if (data.success && data.preferences) {
+                applyPreferences(data.preferences);
+            } else {
+                console.log('No preferences found for user.');
+            }
+        } catch (error) {
+            console.error("Error fetching preferences from backend:", error);
+        }
+    };
+   
+
+    // Event listener for theme selection
     themeOptions.forEach(option => {
         option.addEventListener('click', () => {
             themeOptions.forEach(opt => opt.classList.remove('clicked'));
@@ -53,9 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const dropdown = document.getElementById('dropdown');
-    const fontInput = document.getElementById('fontInput');
-
+    // Event listener for font selection
     dropdown.addEventListener('change', () => {
         selectedFont = dropdown.value; // <-- Save it here
         fontInput.style.fontFamily = selectedFont;
@@ -63,7 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fontInput.value = selectedFont;
     });
 
-    const logoutButton = document.querySelector('#log-out-button')
+    // Event listener for logout button
+    const logoutButton = document.querySelector('#log-out-button');
     logoutButton.addEventListener('click', async () => {
         const response = await fetch('/logout', {
             method: 'GET',
@@ -80,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Event listener for the form submission to save preferences
     document.getElementById("customizeForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -98,6 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (data.success) {
+                // Save the preferences to localStorage for future page loads
+                localStorage.setItem('userPreferences', JSON.stringify({ theme: selectedTheme, font: selectedFont }));
                 alert("Preferences updated!");
             } else {
                 alert("Error updating preferences");
@@ -107,4 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Server error");
         }
     });
+
+    // Apply saved preferences when the page loads
+    loadPreferences();
 });
