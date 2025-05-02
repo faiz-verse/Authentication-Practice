@@ -1,8 +1,13 @@
+:root {
+    --theme-light: white;
+    --theme-dark: tomato;
+}
+
 body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: rgb(255, 255, 255);
+    background: var(--theme-light);
     font-family: Arial, Helvetica, sans-serif;
 
     display: flex;
@@ -36,7 +41,7 @@ body {
 }
 
 #brand span {
-    color: tomato;
+    color: var(--theme-dark);
     font-weight: 600;
     font-size: 22px;
 }
@@ -69,18 +74,18 @@ body {
     align-items: center;
     justify-content: center;
 
-    color: tomato;
+    color: var(--theme-dark);
     font-size: 14px;
 
     border-radius: 5px;
-    border: 1px solid tomato;
+    border: 1px solid var(--theme-dark);
 
     cursor: pointer;
 }
 
 #buttons-wrapper button:active {
-    background: tomato;
-    color: white;
+    background: var(--theme-dark);
+    color: var(--theme-light);
 }
 
 #dashboard-content {
@@ -97,8 +102,16 @@ body {
     overflow: hidden;
 }
 
+#dashboard-content #title span span {
+    color: var(--theme-dark);
+    font-size: 60px;
+}
+
 #dashboard-content #title span {
     display: block;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     transform: translateX(-100%);
     opacity: 0;
     animation: reveal-title 5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
@@ -158,7 +171,7 @@ body {
     padding: 25px;
     background: rgba(128, 128, 128, 0.05);
     border-radius: 5px;
-    border: 1px solid lightgray;
+    border: 1px solid var(--theme-dark);
 
     position: fixed;
     top: 120px;
@@ -166,7 +179,7 @@ body {
 }
 
 #customize-form h2{
-
+    color: var(--theme-dark);
 }
 
 form label{
@@ -239,6 +252,10 @@ form #theme-options{
     background: tomato;
 }
 
+#theme-options .clicked{
+    border: 2px solid black;
+}
+
 input[name='theme']{
     height: 25px;
     border-radius: 5px;
@@ -271,11 +288,16 @@ form button{
     align-items: center;
     justify-content: center;
 
-    color: gray;
+    color: var(--theme-dark);
     font-size: 14px;
 
     border-radius: 5px;
-    border: 1px solid gray;
+    border: 1px solid var(--theme-dark);
 
     cursor: pointer;
+}
+
+form button:active {
+    background: var(--theme-dark);
+    color: var(--theme-light);
 }

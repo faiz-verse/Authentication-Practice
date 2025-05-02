@@ -19,7 +19,7 @@
     </div>
 
     <div id="dashboard-content">
-        <div id="title"><span>Your Dashboard</span></div>
+        <div id="title"><span>Your <span>Dashboard</span></span></div>
         <div id="info">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil culpa vitae cupiditate, dolor in dolorum
                 nulla, laborum voluptas eius placeat magnam! Minima magnam praesentium error accusamus sequi neque
@@ -34,44 +34,47 @@
             <label for="theme">Choose your theme</label>
             <div>
                 <div id="theme-options">
-                    <div class="option">
+                    <div class="option" data-theme="gray">
                         <div class="color1"></div>
                         <div class="color2"></div>
                     </div>
-                    <div class="option">
+                    <div class="option" data-theme="maroon">
                         <div class="color1"></div>
                         <div class="color2"></div>
                     </div>
-                    <div class="option">
+                    <div class="option" data-theme="ocean">
                         <div class="color1"></div>
                         <div class="color2"></div>
                     </div>
-                    <div class="option">
+                    <div class="option" data-theme="forest">
                         <div class="color1"></div>
                         <div class="color2"></div>
                     </div>
-                    <div class="option">
+                    <div class="option clicked" data-theme="default">
                         <div class="color1"></div>
                         <div class="color2"></div>
                     </div>
                 </div>
-                <input type="text" name="theme" placeholder="Theme" required disabled />
+                <input type="text" name="theme" placeholder="Theme" required disabled value="Default" />
             </div>
 
             <div>
                 <label for="font">Choose your font</label>
                 <select name="dropdown" id="dropdown">
-                    <option value="font1">font 1</option>
-                    <option value="font1">font 2</option>
-                    <option value="font1">font 3</option>
-                    <option value="font1">font 4</option>
+                    <option value="Arial, Helvetica, sans-serif"> Arial, Helvetica, sans-serif (Default) </option>
+                    <option value="'Courier New', Courier, monospace">'Courier New', Courier, monospace</option>
+                    <option value="'Times New Roman', Times, serif">'Times New Roman', Times, serif</option>
+                    <option value="Verdana, Geneva, Tahoma, sans-serif">Verdana, Geneva, Tahoma, sans-serif</option>
                 </select>
-                <input type="text" name="font" placeholder="Font" required disabled />
+                <input type="text" name="font" id="fontInput" placeholder="Font" value="Arial, Helvetica, sans-serif"
+                    required disabled />
             </div>
 
             <button type="submit">Customize</button>
         </form>
     </div>
+
+    <script src="/public/js/dashboard.js"></script>
 </body>
 
 </html>
