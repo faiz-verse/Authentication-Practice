@@ -47,6 +47,10 @@ const router = (req, res) => {
         console.log('📡 Incoming request URL:', req.method, req.url);
         return logoutSession(req, res)
     }
+    else if (req.url === "/customize" && req.method === "POST") {
+        const { updatePreferences } = require("../controllers/authController");
+        updatePreferences(req, res);
+    }    
     else {
         pageController.notFound(req, res)
     }

@@ -17,7 +17,11 @@ const signupUser = (req, res) => {
         password, // hash later ideally
         signedUpAt: Date.now(),
         sessionId,
-        sessionExpiresAt: expiresAt
+        sessionExpiresAt: expiresAt,
+        preferences: {
+            theme: "default",
+            font: "Arial, Helvetica, sans-serif"
+        }
     };
 
     const jsonFilePath = path.join(__dirname, '..', 'userData.json');
@@ -100,4 +104,70 @@ const signinUser = (req, res) => {
     });
 };
 
-module.exports = { signupUser, signinUser };
+
+const querystring = require("querystring");
+const updatePreferences = (req, res) => {
+    let body = "";
+    req.on("data", chunk => {
+        body += chunk;
+    });
+
+    req.on("end", () => {
+        try {
+            // ✅ Properly parse JSON body
+            const parsedBody = JSON.parse(body);
+            const theme = parsedBody.theme;
+            const font = parsedBody.font;
+            console.log("Parsed body: ", parsedBody);
+
+            // ✅ Extract sessionId from cookies
+            const cookies = req.headers.cookie || "";
+            const sessionId = cookies
+                .split(";")
+                .map(cookie => cookie.trim())
+                .find(c => c.startsWith("sessionId="))
+                ?.split("=")[1];
+
+            if (!sessionId) {
+                console.log("No sessionId found in cookies");
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ success: false, message: "No session ID found" }));
+                return;
+            }
+
+            console.log("Session ID:", sessionId);
+
+            // ✅ Read userData.json
+            const jsonFilePath = path.join(__dirname, '..', 'userData.json');
+            const fileData = fs.readFileSync(jsonFilePath, "utf-8");
+            const users = JSON.parse(fileData);
+
+            // ✅ Find the user
+            const user = users.find(u => u.sessionId === sessionId);
+            if (!user) {
+                console.log("No user found with sessionId:", sessionId);
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ success: false, message: "Invalid session" }));
+                return;
+            }
+
+            // ✅ Update preferences
+            user.preferences = { theme, font };
+            fs.writeFileSync(jsonFilePath, JSON.stringify(users, null, 2));
+
+            console.log("Preferences updated for user:", user.username);
+
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: true, message: "Preferences updated" }));
+        } catch (err) {
+            console.error("Error in updatePreferences:", err);
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: false, message: "Server error" }));
+        }
+    });
+};
+
+
+
+
+module.exports = { signupUser, signinUser, updatePreferences };
