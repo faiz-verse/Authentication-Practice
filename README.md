@@ -1,4 +1,4 @@
-# 🔐 Authentication Practice Project
+# 🔐 Authentication Practice Project (practice-1)
 
 This is a basic Node.js project created to practice session-based authentication using cookies without any external frameworks like Express.
 
