@@ -29,48 +29,48 @@
 
     <!-- CUSTOMIZE -->
     <div id="customize-form">
-            <h2>Personalize your Dashboard</h2>
-            <form action="/customize" method="POST">
-                <label for="theme">Choose your theme</label>
-                <div>
-                    <div id="theme-options">
-                        <div class="option">
-                            <div class="color1"></div>
-                            <div class="color2"></div>
-                        </div>
-                        <div class="option">
-                            <div class="color1"></div>
-                            <div class="color2"></div>
-                        </div>
-                        <div class="option">
-                            <div class="color1"></div>
-                            <div class="color2"></div>
-                        </div>
-                        <div class="option">
-                            <div class="color1"></div>
-                            <div class="color2"></div>
-                        </div>
-                        <div class="option">
-                            <div class="color1"></div>
-                            <div class="color2"></div>
-                        </div>
+        <h2>Personalize your Dashboard</h2>
+        <form action="/customize" method="POST">
+            <label for="theme">Choose your theme</label>
+            <div>
+                <div id="theme-options">
+                    <div class="option">
+                        <div class="color1"></div>
+                        <div class="color2"></div>
                     </div>
-                    <input type="text" name="theme" placeholder="Theme" required />
+                    <div class="option">
+                        <div class="color1"></div>
+                        <div class="color2"></div>
+                    </div>
+                    <div class="option">
+                        <div class="color1"></div>
+                        <div class="color2"></div>
+                    </div>
+                    <div class="option">
+                        <div class="color1"></div>
+                        <div class="color2"></div>
+                    </div>
+                    <div class="option">
+                        <div class="color1"></div>
+                        <div class="color2"></div>
+                    </div>
                 </div>
+                <input type="text" name="theme" placeholder="Theme" required disabled />
+            </div>
 
-                <div>
+            <div>
                 <label for="font">Choose your font</label>
-                <input type="text" name="font" placeholder="Font" required />
                 <select name="dropdown" id="dropdown">
                     <option value="font1">font 1</option>
                     <option value="font1">font 2</option>
                     <option value="font1">font 3</option>
                     <option value="font1">font 4</option>
                 </select>
+                <input type="text" name="font" placeholder="Font" required disabled />
             </div>
-                
-                <button type="submit">Customize</button>
-            </form>
+
+            <button type="submit">Customize</button>
+        </form>
     </div>
 </body>
 

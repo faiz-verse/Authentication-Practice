@@ -199,6 +199,8 @@ form #theme-options{
     border-radius: 5px;
     overflow: hidden;
     border: 1px solid lightgray;
+
+    cursor: pointer;
 }
 
 .option .color1, .option .color2{
@@ -235,4 +237,45 @@ form #theme-options{
 }
 #theme-options .option:nth-child(5) .color2{
     background: tomato;
+}
+
+input[name='theme']{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 10px;
+}
+
+form #dropdown{
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 0px 10px;
+}
+
+form input[name='font']{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 10px;
+}
+
+form button{
+    all: unset;
+
+    margin-top: 15px;
+
+    height: 30px;
+    width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: gray;
+    font-size: 14px;
+
+    border-radius: 5px;
+    border: 1px solid gray;
+
+    cursor: pointer;
 }
