@@ -64,7 +64,7 @@ signupForm.addEventListener('submit', async (e) => {
             document.cookie = 'savedUseremail=; max-age=0';
             document.cookie = 'savedPassword=; max-age=0';
         }
-        // window.location.href = data.redirectTo;
+        window.location.href = data.redirectTo;
     } else {
         alert(data.message || "Signup failed");
     }
@@ -101,7 +101,7 @@ signinForm.addEventListener('submit', async (e) => {
             document.cookie = 'savedSignInUsername=; max-age=0';
             document.cookie = 'savedSignInPassword=; max-age=0';
         }
-        // window.location.href = data.redirectTo;
+        window.location.href = data.redirectTo;
     } else {
         alert(data.message || "Signin failed");
     }

@@ -65,3 +65,23 @@ dropdown.addEventListener('change', () => {
     fontInput.value = selectedFont;
 });
 
+
+// LOGOUT
+const logoutButton = document.querySelector('#log-out-button')
+logoutButton.addEventListener('click', async ()=> {
+    // logging out of the session
+    const response = await fetch('/logout', {
+        method: 'GET',
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        console.log(data.message);
+        alert('Logged out successfully!');
+        window.location.href = '/';
+    } else {
+        console.log('Unable to delete the session');
+    }
+})
