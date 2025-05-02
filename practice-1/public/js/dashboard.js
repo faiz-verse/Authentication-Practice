@@ -43,20 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Applying preferences:", preferences);  // Add this line
             selectedTheme = preferences.theme || 'default';
             selectedFont = preferences.font || 'Arial';
-   
+
             // Apply theme
             const themeObj = themeJsonObj[selectedTheme] || themeJsonObj['default'];
             root.style.setProperty('--theme-light', themeObj.themeLight);
             root.style.setProperty('--theme-dark', themeObj.themeDark);
             themeInput.value = selectedTheme;
-   
+
             // Apply font
             body.style.fontFamily = selectedFont;
             fontInput.style.fontFamily = selectedFont;
             dropdown.value = selectedFont;  // Ensure the dropdown shows the selected font
+
+            // Apply 'clicked' class to the selected theme option
+            themeOptions.forEach(option => {
+                // Remove the 'clicked' class from all options
+                option.classList.remove('clicked');
+
+                // Add 'clicked' class to the option that matches the selected theme
+                if (option.dataset.theme === selectedTheme) {
+                    option.classList.add('clicked');
+                }
+            });
         }
     };
-   
+
 
     // Fetch preferences from the backend
     const loadPreferences = async () => {
@@ -65,15 +76,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: 'GET',
                 credentials: 'include' // Ensure the user's session or cookies are sent along
             });
-   
+
             if (!response.ok) {
                 throw new Error('Failed to fetch preferences');
             }
-   
+
             const data = await response.json();
-   
+
             console.log(data);  // Add this line to inspect the returned data
-   
+
             if (data.success && data.preferences) {
                 applyPreferences(data.preferences);
             } else {
@@ -83,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching preferences from backend:", error);
         }
     };
-   
+
 
     // Event listener for theme selection
     themeOptions.forEach(option => {

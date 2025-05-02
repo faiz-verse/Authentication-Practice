@@ -84,7 +84,6 @@ clearCookiesBtn.addEventListener('click', async () => {
 
         if (data.success) {
             console.log(data.message);
-            alert('Logged out successfully!');
             window.location.href = '/';
         } else {
             console.log('Unable to delete the session');
